@@ -70,7 +70,7 @@ class Inscricao {
         save()
     }
 
-    static Inscricao buscarPremiaveis(){
+    static List buscarPremiaveis(){
         def sb =  new StringBuilder()
         def random = new Random()
 
@@ -81,7 +81,7 @@ class Inscricao {
         sb.append(random.nextInt(300).toString())
         println sb.toString()
         //TODO buscar apenas inscricoes do evento ativo
-        Inscricao.find("from Inscricao i where i.id in (1,"+ sb.toString() + ") and i.fezCheckin = true and i.sorteado = false and i.premiado = false")
+        Inscricao.findAll("from Inscricao i where i.id in ("+ sb.toString() + ") and i.fezCheckin = true and i.sorteado = false and i.premiado = false")
     }
 
     static Inscricao buscarPorEventoECpf(evento, cpf){
