@@ -24,6 +24,14 @@ class Inscricao {
     String comoSoube
     Boolean premiado = false
 
+	boolean inscricaoSimples(){
+		//xucro! FIXME buscar o evento pela sessao ou combobox
+		evento = Evento.get(1)
+		fezCheckin = true
+		if(this.participante.validate(['nome', 'email'])){
+			save(validate: false)
+		}
+	}
 
     boolean confirmarPresenca(confirma,palestras)
     {
@@ -58,13 +66,11 @@ class Inscricao {
     }
 
     void marcarSorteado(){
-        println 'marcarSorteado'
         this.sorteado = true
         save()
     }
 
     void marcarPremiado(){
-        println 'marcarPremiado'
         marcarSorteado()
         this.premiado = true
         save()
@@ -97,6 +103,7 @@ class Inscricao {
     }
 
     static constraints = {
+		//participante(validator:{it.validate()})
         confirmado(nullable:true)
         comoSoube(nullable:true, maxSize:1000)
         expectativas(nullable:true, maxSize:1000)
