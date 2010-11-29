@@ -15,12 +15,12 @@
           <table>
             <thead>
               <tr>
-                <g:sortableColumn property="id" title="${message(code: 'inscricao.id.label', default: 'Id')}" />
-                <g:sortableColumn property="participante.nome" title="${message(code: 'inscricao.participante.nome.label', default: 'Participante')}" />
-                <g:sortableColumn property="participante.nome" title="Sortear?" />
-                <g:sortableColumn property="participante.nome" title="Premiar?" />
-                <g:sortableColumn property="participante.nome" title="Sorteado" />
-                <g:sortableColumn property="participante.nome" title="Premiado" />
+                <g:sortableColumn property="id" title="ID" />
+                <g:sortableColumn property="nome" title="Participante" />
+                <g:sortableColumn property="nome" title="Sortear?" />
+                <g:sortableColumn property="nome" title="Premiar?" />
+                <g:sortableColumn property="nome" title="Sorteado" />
+                <g:sortableColumn property="nome" title="Premiado" />
             </tr>
             </thead>
             <tbody>
@@ -29,7 +29,7 @@
 
                 <td>${fieldValue(bean: inscricaoInstance, field: "id")}</td>
 
-                <td>${fieldValue(bean: inscricaoInstance, field: "participante")}</td>
+                <td>${fieldValue(bean: inscricaoInstance, field: "nome")}</td>
 
                 <td>
                   <g:link action="sortear" id="${inscricaoInstance.id}">SORTEADO</g:link>

@@ -27,7 +27,7 @@ environments {
         dataSource {
             driverClassName = "com.mysql.jdbc.Driver"
             dbCreate = "update"
-            url = "jdbc:mysql://localhost/jmeetings_db"
+            url = "jdbc:mysql://localhost/jmeetings"
             username = "root"
             password = "root"
 			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"

@@ -14,64 +14,69 @@
   </div>
   <div class="body">
     <h1><g:message code="default.list.label" args="[entityName]" /></h1>
-	<div id="message">
-		<g:if test="${flash.message}">
-			<div class="message">${flash.message}</div>
-		</g:if>
-	</div>
-	<g:hasErrors bean="${inscricaoInstance?.participante}">
+    <div id="message">
+      <g:if test="${flash.message}">
+        <div class="message">${flash.message}</div>
+      </g:if>
+    </div>
+    <g:hasErrors bean="${inscricaoInstance?.participante}">
       <div class="errors">
         <g:renderErrors bean="${inscricaoInstance?.participante}" as="list" />
       </div>
     </g:hasErrors>
-	<g:form action="inscricaoSimples" >
-		<div class="dialog">
-			<table>
-				<tbody>
-					<tr class="prop">
-						<td valign="top" class="name">
-							<label for="filtro">Nome</label>
-						</td>
-						<td valign="top" class="value nome">
-							<g:textField name="participante.nome" value="${inscricaoInstance?.participante?.nome}"/>
-						</td>
-					</tr>
-					<tr class="prop">
-						<td valign="top" class="name">
-							<label for="filtro">Email</label>
-						</td>
-						<td valign="top" class="value email">
-							<g:textField name="participante.email" value="${inscricaoInstance?.participante?.email}"/>
-						</td>
-					</tr>
-					<tr class="prop">
-						<td valign="top" class="name">
-							<g:submitButton name="inscricao" value="Inscrição"/>
-						</td>
-					</tr>
+    <g:hasErrors bean="${novaInscricao}">
+      <div class="errors">
+        <g:renderErrors bean="${novaInscricao}" as="list" />
+      </div>
+    </g:hasErrors>
+    <g:form action="inscricaoSimples" >
+      <div class="dialog">
+        <table>
+          <tbody>
+            <tr class="prop">
+              <td valign="top" class="name">
+                <label for="filtro">Nome</label>
+              </td>
+              <td valign="top" class="value nome">
+          <g:textField name="nome" value="${novaInscricao?.nome}"/>
+          </td>
+          </tr>
+          <tr class="prop">
+            <td valign="top" class="name">
+              <label for="filtro">Email</label>
+            </td>
+            <td valign="top" class="value email">
+          <g:textField name="email" value="${novaInscricao?.email}"/>
+          </td>
+          </tr>
+          <tr class="prop">
+            <td valign="top" class="name">
+          <g:submitButton name="inscricao" value="Inscrição"/>
+          </td>
+          </tr>
 
-				</tbody>
-			</table>
-		</div>
-	</g:form>
-	<hr/>
-	<g:form action="buscar" >
-		<div class="dialog">
-			<table>
-				<tbody>
-					<tr class="prop">
-						<td valign="top" class="name">
-							<label for="filtro">Nome ou e-mail</label>
-						</td>
-						<td valign="top" class="value filtro">
-							<g:textField name="filtro" value="${filtro}"/> &nbsp;&nbsp;<g:submitButton name="buscar" value="Buscar" />
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</g:form>
-	
+          </tbody>
+        </table>
+      </div>
+    </g:form>
+    <hr/>
+    <g:form action="buscar" >
+      <div class="dialog">
+        <table>
+          <tbody>
+            <tr class="prop">
+              <td valign="top" class="name">
+                <label for="filtro">Nome ou e-mail</label>
+              </td>
+              <td valign="top" class="value filtro">
+          <g:textField name="filtro" value="${filtro}"/> &nbsp;&nbsp;<g:submitButton name="buscar" value="Buscar" />
+          </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </g:form>
+
 
     <div class="list">
       <table>
@@ -88,10 +93,10 @@
 
         <g:sortableColumn property="participante.cidade" title="${message(code: 'inscricao.participante.cidade.label', default: 'Cidade')}" />
 
-				<g:sortableColumn property="fezCheckin" title="${message(code: 'fezCheckin.label', default: 'Fez Checkin?')}" />
-        
-				<g:sortableColumn property="recebeuKit" title="${message(code: 'recebeuKit.label', default: 'Recebeu Kit?')}" />
-                                <g:sortableColumn property="confirmado" title="${message(code: 'confirmado.label', default: 'Confirmado?')}" />
+        <g:sortableColumn property="fezCheckin" title="${message(code: 'fezCheckin.label', default: 'Fez Checkin?')}" />
+
+        <g:sortableColumn property="recebeuKit" title="${message(code: 'recebeuKit.label', default: 'Recebeu Kit?')}" />
+        <g:sortableColumn property="confirmado" title="${message(code: 'confirmado.label', default: 'Confirmado?')}" />
         </tr>
         </thead>
         <tbody>
@@ -109,19 +114,19 @@
           <td>${fieldValue(bean: inscricaoInstance?.participante, field: "cidade")}</td>
 
           <td> 	
-						<g:if test="${inscricaoInstance.fezCheckin}">Sim</g:if>
-						<g:else><g:link action="checkin" id="${inscricaoInstance.id}" params="[filtro:filtro]">Checkin</g:link></g:else>
-				  </td>
-				<td> 	
-					<g:if test="${inscricaoInstance.recebeuKit}">Sim</g:if>
-					<g:else><g:link action="receberKit" id="${inscricaoInstance.id}" params="[filtro:filtro]">Receber kit</g:link></g:else>
-				  </td>
-                                 <td>
-					<g:if test="${inscricaoInstance.confirmado}">Sim</g:if>
-                                        <g:if test="${inscricaoInstance.confirmado == null}">Não Respondeu</g:if>
-                                        <g:if test="${inscricaoInstance.confirmado == false}">Não</g:if>
-                                        
-				  </td>
+          <g:if test="${inscricaoInstance.fezCheckin}">Sim</g:if>
+          <g:else><g:link action="checkin" id="${inscricaoInstance.id}" params="[filtro:filtro]">Checkin</g:link></g:else>
+          </td>
+          <td>
+          <g:if test="${inscricaoInstance.recebeuKit}">Sim</g:if>
+          <g:else><g:link action="receberKit" id="${inscricaoInstance.id}" params="[filtro:filtro]">Receber kit</g:link></g:else>
+          </td>
+          <td>
+          <g:if test="${inscricaoInstance.confirmado}">Sim</g:if>
+          <g:if test="${inscricaoInstance.confirmado == null}">Não Respondeu</g:if>
+          <g:if test="${inscricaoInstance.confirmado == false}">Não</g:if>
+
+          </td>
           </tr>
         </g:each>
         </tbody>

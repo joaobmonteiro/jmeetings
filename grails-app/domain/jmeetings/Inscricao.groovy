@@ -24,14 +24,14 @@ class Inscricao {
     String comoSoube
     Boolean premiado = false
 
-	boolean inscricaoSimples(){
-		//xucro! FIXME buscar o evento pela sessao ou combobox
-		evento = Evento.get(1)
-		fezCheckin = true
-		if(this.participante.validate(['nome', 'email'])){
-			save(validate: false)
-		}
-	}
+    boolean inscricaoSimples(){
+        //xucro! FIXME buscar o evento pela sessao ou combobox
+        evento = Evento.get(1)
+        fezCheckin = true
+        if(this.participante.validate(['nome', 'email'])){
+            save(validate: false)
+        }
+    }
 
     boolean confirmarPresenca(confirma,palestras)
     {
@@ -65,18 +65,7 @@ class Inscricao {
         save()
     }
 
-    void marcarSorteado(){
-        this.sorteado = true
-        save()
-    }
-
-    void marcarPremiado(){
-        marcarSorteado()
-        this.premiado = true
-        save()
-    }
-
-    static List buscarPremiaveis(){
+    static NovaInscricao buscarPremiaveis(){
         def sb =  new StringBuilder()
         def random = new Random()
 
@@ -87,7 +76,7 @@ class Inscricao {
         sb.append(random.nextInt(300).toString())
         println sb.toString()
         //TODO buscar apenas inscricoes do evento ativo
-        Inscricao.findAll("from Inscricao i where i.id in ("+ sb.toString() + ") and i.fezCheckin = true and i.sorteado = false and i.premiado = false")
+        NovaInscricao.find("from NovaInscricao i where i.id in ("+ sb.toString() + ") and i.fezCheckin = true and i.sorteado = false and i.premiado = false")
     }
 
     static Inscricao buscarPorEventoECpf(evento, cpf){
@@ -103,7 +92,7 @@ class Inscricao {
     }
 
     static constraints = {
-		//participante(validator:{it.validate()})
+        //participante(validator:{it.validate()})
         confirmado(nullable:true)
         comoSoube(nullable:true, maxSize:1000)
         expectativas(nullable:true, maxSize:1000)
